@@ -50,19 +50,23 @@ class Flat(models.Model):
 
     liked_by = models.ManyToManyField(User,
             blank=True,
-            related_name="liked_flat",
+            related_name="liked_flats",
             verbose_name = 'Кто лайкнул')
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
 
 class Complain(models.Model):
-    complainant = models.ForeignKey(User,
-            on_delete=models.CASCADE,
-            verbose_name='Кто жаловался',)
-    contested_flat = models.ForeignKey(Flat,
-            on_delete=models.CASCADE,
-            verbose_name='Квартира, на которую пожаловались')
+    complainant = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='Кто жаловался',
+        related_name='complained_users')
+    contested_flat = models.ForeignKey(
+        Flat,
+        on_delete=models.CASCADE,
+        verbose_name='Квартира, на которую пожаловались',
+        related_name='appealed_flats')
     comment = models.TextField(verbose_name='Текст жалобы')
 
 class Owner(models.Model):
