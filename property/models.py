@@ -70,7 +70,7 @@ class Complain(models.Model):
     comment = models.TextField(verbose_name='Текст жалобы')
 
 class Owner(models.Model):
-    owner = models.CharField('ФИО владельца', max_length=200)
+    name = models.CharField('ФИО владельца', max_length=200)
     phone_number = models.CharField('Номер владельца', max_length=20)
     pure_phone = PhoneNumberField(
         'Нормализованный номер владельца',
